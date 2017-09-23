@@ -1,16 +1,24 @@
-#Get pedigree file for a vector of lines
-getallGen<- function(lines){
-  lines0<- lines
-  srh<- lines
+#################
+# getallGen
+#' Function for getting all generations of a pedigree
+#' 
+#'  Parameters:
+#'  @gidvec A vector of gids
+#'  
+#'  @return A dataframe with the pedigree
+################
+getallGen<- function(gidvec){
+  lines0<- gidvec
+  srh<- gidvec
   rnd<-0
-  while(length(lines)>0){
+  while(length(gidvec)>0){
     rnd<- rnd+1
-    Pd<- get1Gen(lines)
+    Pd<- get1Gen(gidvec)
     if(!is.null(nrow(Pd))){
-      lines<- as.numeric(Pd[which(Pd$gene==0),1]) #founders
+      gidvec<- as.numeric(Pd[which(Pd$gene==0),1]) #founders
     }
-    lines<- setdiff(lines, srh)
-    srh<- append(srh, lines)
+    gidvec<- setdiff(gidvec, srh)
+    srh<- append(srh, gidvec)
     if(rnd>1){
       Pds<- rbind(Pds, Pd)
     }else{
