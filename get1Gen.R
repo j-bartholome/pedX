@@ -1,9 +1,19 @@
+#################
+# get1Gen
+#' Function for getting one generation of a pedigree
+#' 
+#'  Parameters:
+#'  @gidvec A vector of gids
+#'  
+#'  @return A dataframe with the pedigree
+################
+
 #Get pedigrees, (one generation) for a vector of gids
-get1Gen<-function(findvec){
-  findvec<- na.omit(findvec)
-  for(i in 1:length(findvec)){
-    if(inDatabase(findvec[i])){
-      tb<- tracePedg1(findvec[i])
+get1Gen<-function(gidvec){
+  gidvec<- na.omit(gidvec)
+  for(i in 1:length(gidvec)){
+    if(inDatabase(gidvec[i])){
+      tb<- tracePedg1(gidvec[i])
       ixsA<- which(tb[,3]==-1 & tb[,5]!=0)
       ixsB<- which(tb[,3]==-1 & tb[,5]==0)
       if(length(ixsA)>0){
@@ -14,7 +24,7 @@ get1Gen<-function(findvec){
       }
       tb<- tb[,c('gid','gpid1','gpid2')]
     }else{
-      tb<- c(findvec[i], NA, NA)
+      tb<- c(gidvec[i], NA, NA)
       names(tb)<-c('gid','gpid1','gpid2')
     }
     if(i==1){
