@@ -1,4 +1,14 @@
-#Function to check if someting is in the database
+#################
+# inDatabase
+#' Function to check if something is in the database
+#' 
+#'  Parameters:
+#'  @gid A gid
+#'  
+#'  @return TRUE or FALSE 
+#'  
+################
+
 inDatabase<- function(gid){
   if(is.na(gid)){
     tf<- FALSE

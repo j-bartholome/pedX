@@ -1,4 +1,14 @@
-##Trace 1 generation pedigree function for a single gid
+#################
+# tracePedg1
+#' Function for tracing one generation of a pedigree
+#' 
+#'  Parameters:
+#'  @gid A gid
+#'  
+#'  @return A dataframe of query results containg complete generation traced
+#'  
+################
+
 tracePedg1<- function(gid){
   germplasm <- dbGetQuery(con, sprintf("SELECT * FROM germplsm WHERE gid=%d",gid))
   if(nrow(germplasm)>0){

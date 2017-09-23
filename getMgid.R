@@ -1,4 +1,15 @@
-#Function to get the root GID (the last gid resulting from a derivative method)
+#################
+# getMgid
+#' Function for getting the Mgid 
+#' Mgid is last gid resulting from a derivative method
+#' 
+#'  Parameters:
+#'  @gid A gid
+#'  
+#'  @return The Mgid 
+#'  
+################
+
 getMgid<- function(gid){
   
   getMtype<- function(gid){#Function to get the managament method

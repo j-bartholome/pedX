@@ -8,6 +8,7 @@
 #'  @return A dataframe with the pedigree
 #'  
 ################
+
 get1Gen<-function(gidvec){
   gidvec<- na.omit(gidvec)
   for(i in 1:length(gidvec)){

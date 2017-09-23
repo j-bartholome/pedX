@@ -8,6 +8,7 @@
 #'  @return A dataframe with the pedigree
 #'  
 ################
+
 getallGen<- function(gidvec){
   lines0<- gidvec
   srh<- gidvec
