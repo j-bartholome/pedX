@@ -6,6 +6,7 @@
 #'  @gidvec A vector of gids
 #'  
 #'  @return A dataframe with the pedigree
+#'  
 ################
 getallGen<- function(gidvec){
   lines0<- gidvec

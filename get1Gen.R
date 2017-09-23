@@ -6,6 +6,7 @@
 #'  @gidvec A vector of gids
 #'  
 #'  @return A dataframe with the pedigree
+#'  
 ################
 get1Gen<-function(gidvec){
   gidvec<- na.omit(gidvec)
