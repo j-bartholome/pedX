@@ -10,11 +10,11 @@
 #'  
 ################
 
-getMgid<- function(gid){
+getMgid<- function(gid, dbenv){
   
   getMtype<- function(gid){#Function to get the managament method
     if(!is.na(line)){
-      grm<- dbGetQuery(con, sprintf("SELECT * FROM germplsm WHERE gid=%d",gid))
+      grm<- with(dbenv, dbGetQuery(con, sprintf("SELECT * FROM germplsm WHERE gid=%d",gid)))
       tf<- nrow(grm)>0
       if(tf){
         meth<-grm[1,'methn']

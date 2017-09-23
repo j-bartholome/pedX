@@ -4,16 +4,17 @@
 #' 
 #'  Parameters:
 #'  @gid A gid
+#'  @dbenv environment with connection to datbase
 #'  
 #'  @return TRUE or FALSE 
 #'  
 ################
 
-inDatabase<- function(gid){
+inDatabase<- function(gid, dbenv){
   if(is.na(gid)){
     tf<- FALSE
   }else{
-    rec<- dbGetQuery(con, sprintf("SELECT * FROM germplsm WHERE gid=%d",gid))
+    rec<- with(dbenv, dbGetQuery(con, sprintf("SELECT * FROM germplsm WHERE gid=%d",gid)))
     tf<- nrow(rec)>0
   }
   return(tf)
