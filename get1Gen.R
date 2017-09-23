@@ -2,7 +2,7 @@
 get1Gen<-function(findvec){
   findvec<- na.omit(findvec)
   for(i in 1:length(findvec)){
-    if(InDatabase(findvec[i])){
+    if(inDatabase(findvec[i])){
       tb<- tracePedg1(findvec[i])
       ixsA<- which(tb[,3]==-1 & tb[,5]!=0)
       ixsB<- which(tb[,3]==-1 & tb[,5]==0)
