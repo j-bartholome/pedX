@@ -5,10 +5,10 @@ getallNames<- function(gid, dbenv, type=6){
   if(!is.na(gid)){
     if(type=='all'){
       nms<- with(dbenv, dbGetQuery(con, 
-                    sprintf("SELECT nval FROM names WHERE gid=%s", gid)))
+                    sprintf("SELECT nval FROM names WHERE nstat!=9 AND gid=%s", gid)))
     }else{
       nms<- with(dbenv, dbGetQuery(con, 
-                sprintf("SELECT nval FROM names WHERE gid=%s AND ntype=%s", gid, type)))
+                sprintf("SELECT nval FROM names WHERE nstat!=9 AND gid=%s AND ntype=%s", gid, type)))
     }
     
     if(nrow(nms)>0){

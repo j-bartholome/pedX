@@ -34,7 +34,7 @@ getMgid<- function(gid, dbenv){
   
   mtype<- getMtype(gid, dbenv=dbenv)
   while(mtype[[1]]=='MAN' & mtype[[2]]!=0){
-    gid<- mtype[[2]]
+  	gid<- mtype[[2]]
     mtype<- getMtype(gid, dbenv=dbenv)
   }
   return(gid)
