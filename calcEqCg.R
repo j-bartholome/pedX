@@ -1,12 +1,12 @@
 ########################
 #The number of equivalent complete generations for several gids
 #See https://doi.org/10.1186/1297-9686-45-1
-calcEqCg<- function(line){
-  calc1EqCg<- function(line, db=NULL){
+calcEqCg<- function(gid, dbenv){
+  calc1EqCg<- function(gid, db=NULL){
     cyc<- 0
-    p<- setdiff(GetPrnts(line,pastenm=T), 0)
+    p<- setdiff(getPrnts(gid, dbenv=dbenv, pastenm=T), 0)
     if(is.null(db)){
-      db<- data.frame(line, p, stringsAsFactors = F)
+      db<- data.frame(gid, p, stringsAsFactors = F)
     }
     p<- unlist(strsplit(p, split=","))
     cyc<- cyc+1
@@ -19,8 +19,8 @@ calcEqCg<- function(line){
       p_db<- na.omit(db[na.omit(ixdb),2])
       if(TRUE %in% is.na(ixdb)){
         srch<- as.numeric(p[is.na(ixdb)])
-        p<- as.vector(sapply(srch, GetPrnts, pastenm=T))
-        dbn<- data.frame(line=srch, p=p, stringsAsFactors = F)
+        p<- as.vector(sapply(srch, getPrnts, dbenv=dbenv, pastenm=T))
+        dbn<- data.frame(gid=srch, p=p, stringsAsFactors = F)
         db<-rbind(db, dbn)
         p<- append(p, p_db)
       }else{
@@ -36,12 +36,12 @@ calcEqCg<- function(line){
   }
   rslts<- c()
   cycs<- c()
-  for(i in 1:length(line)){
+  for(i in 1:length(gid)){
     cat(i, '\n')
     if(i>1){
-      obj<- calc1EqCg(line[i], db=db0)
+      obj<- calc1EqCg(gid[i], db=db0)
     }else{
-      obj<- calc1EqCg(line[i])
+      obj<- calc1EqCg(gid[i])
     }
     rslt<- obj$EqGi
     db0<- obj$db

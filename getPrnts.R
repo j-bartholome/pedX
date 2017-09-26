@@ -1,14 +1,15 @@
 #########
 #Get parents of an individaul
-getPrnts<- function(line, pastenm=F){
-  if(line==0 | is.na(line)){
+getPrnts<- function(gid, dbenv, pastenm=F){
+  if(gid==0 | is.na(gid)){
     prnts<- c(0, 0)
   }else{
-    f1<- GetF1(line) #gid of the cros
+    f1<- getF1(gid, dbenv) #gid of the cros
     if(is.na(f1) | f1==0){
       prnts<- c(0, 0)
     }else{
-      f1inf<- dbGetQuery(con, sprintf("SELECT * FROM germplsm WHERE gid=%d",f1)) #query of cross
+      assign('f1', f1, envir=dbenv)
+      f1inf<- with(dbenv,dbGetQuery(con, sprintf("SELECT * FROM germplsm WHERE gid=%d",f1))) #query of cross
       prnts<- as.numeric(f1inf[1,c(4:5)]) #gids of the parents
     }
   }

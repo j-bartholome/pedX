@@ -9,11 +9,11 @@
 #'  
 ################
 
-get1Gen<-function(gidvec){
+get1Gen<-function(gidvec, dbenv){
   gidvec<- na.omit(gidvec)
   for(i in 1:length(gidvec)){
-    if(inDatabase(gidvec[i])){
-      tb<- tracePedg1(gidvec[i])
+    if(inDatabase(gidvec[i], dbenv)){
+      tb<- tracePedg1(gidvec[i], dbenv=dbenv)
       ixsA<- which(tb[,3]==-1 & tb[,5]!=0)
       ixsB<- which(tb[,3]==-1 & tb[,5]==0)
       if(length(ixsA)>0){

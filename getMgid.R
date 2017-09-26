@@ -11,14 +11,15 @@
 ################
 
 getMgid<- function(gid, dbenv){
-  
+  assign('gid', gid, envir=dbenv)
   getMtype<- function(gid){#Function to get the managament method
-    if(!is.na(line)){
+    if(!is.na(gid)){
       grm<- with(dbenv, dbGetQuery(con, sprintf("SELECT * FROM germplsm WHERE gid=%d",gid)))
       tf<- nrow(grm)>0
       if(tf){
         meth<-grm[1,'methn']
-        mtype<- dbGetQuery(con, sprintf("SELECT mtype FROM methods WHERE mid=%d",meth))[,1]
+        assign('meth', meth, envir=dbenv)
+        mtype<- with(dbenv,dbGetQuery(con, sprintf("SELECT mtype FROM methods WHERE mid=%d",meth)))[,1]
         gpid2=grm[1,'gpid2']
       }else{
         mtype<-'null'
@@ -33,8 +34,8 @@ getMgid<- function(gid, dbenv){
   
   mtype<- getMtype(gid)
   while(mtype[[1]]=='MAN' & mtype[[2]]!=0){
-    line<- mtype[[2]]
+    gid<- mtype[[2]]
     mtype<- getMtype(gid)
   }
-  return(line)
+  return(gid)
 }

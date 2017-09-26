@@ -9,8 +9,9 @@
 #'  
 ################
 
-tracePedg1<- function(gid){
-  germplasm <- dbGetQuery(con, sprintf("SELECT * FROM germplsm WHERE gid=%d",gid))
+tracePedg1<- function(gid, dbenv){
+  assign('gid', gid, envir=dbenv)
+  germplasm <- with(dbenv,dbGetQuery(con, sprintf("SELECT * FROM germplsm WHERE gid=%d",gid)))
   if(nrow(germplasm)>0){
     nprgntr<- germplasm[,'gnpgs'] #number of progeneters
     tab<- germplasm
@@ -20,14 +21,16 @@ tracePedg1<- function(gid){
       }
       if(nprgntr==-1){ #if derivitave methods
         f1 <- germplasm[1,"gpid1"] #get the id for the f1 cross
-        f1cross <- dbGetQuery(con,  #look up f1 cross 
-                              sprintf("SELECT * FROM germplsm WHERE gid=%d",f1))
+        assign('f1', f1, envir=dbenv)
+        f1cross <- with(dbenv,dbGetQuery(con,  #look up f1 cross 
+                              sprintf("SELECT * FROM germplsm WHERE gid=%d",f1)))
       }
       tab<- germplasm #initialize results table
       while(nrow(germplasm)>0){ #if germplasm lookup contains records
         if(germplasm[,'gnpgs']==-1){ #if germplasm lookup is deriv.
-          germplasm <- dbGetQuery(con, #look up the pedigree of the parent
-                                  sprintf("SELECT * FROM germplsm WHERE gid=%d",germplasm[,'gpid2']))
+          assign('gpid2', germplasm[,'gpid2'], envir=dbenv)
+          germplasm <- with(dbenv,dbGetQuery(con, #look up the pedigree of the parent
+                                  sprintf("SELECT * FROM germplsm WHERE gid=%d",gpid2)))
           tab<- rbind(tab, germplasm) #add the immediate parent ped to the table
         }else{ #if not deriv. stop 
           break

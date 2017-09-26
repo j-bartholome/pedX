@@ -11,6 +11,7 @@
 ################
 
 inDatabase<- function(gid, dbenv){
+  assign('gid', gid, envir=dbenv)
   if(is.na(gid)){
     tf<- FALSE
   }else{

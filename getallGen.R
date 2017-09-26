@@ -9,13 +9,13 @@
 #'  
 ################
 
-getallGen<- function(gidvec){
+getallGen<- function(gidvec, dbenv){
   lines0<- gidvec
   srh<- gidvec
   rnd<-0
   while(length(gidvec)>0){
     rnd<- rnd+1
-    Pd<- get1Gen(gidvec)
+    Pd<- get1Gen(gidvec, dbenv=dbenv)
     if(!is.null(nrow(Pd))){
       gidvec<- as.numeric(Pd[which(Pd$gene==0),1]) #founders
     }
