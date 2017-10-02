@@ -6,6 +6,9 @@
 #' 
 #'  Parameters:
 #'  @P Sparse pedigree matrix (class pedigree from pedigreemm)
+#'  @ Cfun is the environment containing the 
+#'  C++ code for the matrix multiplication step, this is created using 
+#'  defCfcns
 #'  
 #'  @return A sparse relationship matrix
 #'  

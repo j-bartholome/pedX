@@ -1,3 +1,12 @@
+#################
+# defCfcns
+#' Puts the C++ code in the environment for use later
+#' So far this approach is not effective at improving the speed 
+#' beyond that of crossprod(), 
+#' this requires the inline package
+#' 
+#'#####
+
 defCfcns<-function(){
   incl<- 'using Eigen::LLT;
   using Eigen::Lower;
