@@ -1,11 +1,9 @@
-#################
-# defCfcns
 #' Puts the C++ code in the environment for use later
-#' So far this approach is not effective at improving the speed 
-#' beyond that of crossprod(), 
-#' this requires the inline package
-#' 
-#'#####
+#'
+#' @importFrom imports cxxfunction
+#' @return the environment with the C++ function
+#' @export
+#'
 
 defCfcns<-function(){
   incl<- 'using Eigen::LLT;
