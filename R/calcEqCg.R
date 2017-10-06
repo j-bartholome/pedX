@@ -1,5 +1,10 @@
-########################
-#The number of equivalent complete generations for several gids
+#' The number of equivalent complete generations for several gids
+#'
+#' @param gid a vector of gids
+#' @param dbenv the database connection environment
+#' @return a list of the EqCgs and the total number of cycles
+#' @export
+#'
 #See https://doi.org/10.1186/1297-9686-45-1
 calcEqCg<- function(gid, dbenv){
   calc1EqCg<- function(gid, db=NULL){
@@ -49,5 +54,5 @@ calcEqCg<- function(gid, dbenv){
     cycs<- append(cycs, cyc)
     rslts<- append(rslts, rslt)
   }
-  return(list(rslts=rslts, cycs=cycs))  
+  return(list(rslts=rslts, cycs=cycs))
 }

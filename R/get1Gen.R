@@ -1,14 +1,10 @@
-#################
-# get1Gen
-#' Function for getting one generation of a pedigree
-#' 
-#'  Parameters:
-#'  @gidvec A vector of gids
-#'  
-#'  @return A dataframe with the pedigree
-#'  
-################
-
+#' get1Gen Function for getting one generation of a pedigree
+#'
+#' @param gidvec A vector of gids
+#' @param dbenv the database connection environment
+#' @return A dataframe with the pedigree
+#' @export
+#'
 get1Gen<-function(gidvec, dbenv){
   gidvec<- na.omit(gidvec)
   for(i in 1:length(gidvec)){
@@ -30,7 +26,7 @@ get1Gen<-function(gidvec, dbenv){
     if(i==1){
       tbs<- tb
     }else{
-      tbs<- rbind(tbs, tb) 
+      tbs<- rbind(tbs, tb)
     }
   }
   if(!is.null(dim(tbs))){

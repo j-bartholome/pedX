@@ -1,14 +1,10 @@
-#################
-# getallGen
-#' Function for getting all generations of a pedigree
-#' 
-#'  Parameters:
-#'  @gidvec A vector of gids
-#'  
-#'  @return A dataframe with the pedigree
-#'  
-################
-
+#' getallGen function for getting all generations of a pedigree
+#'
+#' @param gidvec A vector of gids
+#' @param dbenv the database connection environment
+#' @return A dataframe with the pedigree
+#' @export
+#'
 getallGen<- function(gidvec, dbenv){
   lines0<- gidvec
   srh<- gidvec
@@ -29,13 +25,13 @@ getallGen<- function(gidvec, dbenv){
   }
   if(!is.null(nrow(Pds))){
     Pds<- Pds[-setdiff(which(is.na(Pds[,1]) | is.na(Pds[,2])),match(lines0, Pds[,1])),]
-    Pds<- unique(Pds[,c(1:3)])  
+    Pds<- unique(Pds[,c(1:3)])
     Pds[which(Pds[,2]==0),2]<- NA
     Pds[which(Pds[,3]==0),3]<- NA
-    Pds2<-editPed(Pds[,'sire'], Pds[,'dam'], Pds[,'label'])  
+    Pds2<-editPed(Pds[,'sire'], Pds[,'dam'], Pds[,'label'])
   }else{
     Pds2<- Pds
   }
-  
-  return(Pds2)  
+
+  return(Pds2)
 }

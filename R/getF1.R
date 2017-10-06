@@ -1,5 +1,11 @@
-#########################################
-#Function to get gid of the nearest f1 cross
+#' getF1 function to get gid of the nearest f1 cross
+#'
+#' @import RPostgreSQL
+#' @param gid a gid of interest
+#' @param dbenv the database connection environment
+#' @return A sparse relationship matrix
+#' @export
+#'
 getF1<- function(gid, dbenv){
   assign('gid', gid, envir=dbenv)
   if(is.na(gid)){
@@ -21,7 +27,7 @@ getF1<- function(gid, dbenv){
         f1<- NA
       }
     }else{
-      f1<- NA 
+      f1<- NA
     }
   }
   return(f1)

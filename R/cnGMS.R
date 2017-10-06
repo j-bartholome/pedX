@@ -1,11 +1,11 @@
 #' Setting the connection
 #'
-#' @importFrom RPostgreSQL dbDriver dbConnect
+#' @import RPostgreSQL
 #' @param usr character username
 #' @param pws character passward
 #' @return the object which is the function environment
 #' @export
-
+#'
 cnGMS<- function(usr, psw){
   yourusername= usr
   yourpassword= psw

@@ -1,15 +1,11 @@
-#################
-# getMgid
-#' Function for getting the Mgid 
-#' Mgid is last gid resulting from a derivative method
-#' 
-#'  Parameters:
-#'  @gid A gid
-#'  
-#'  @return The Mgid 
-#'  
-################
-
+#' getMgid Function for getting the last gid resulting from a derivative method
+#'
+#' @import RPostgreSQL
+#' @param gid A numeric gid
+#' @param dbenv the database connection environment
+#' @return a numeric gid
+#' @export
+#'
 getMgid<- function(gid, dbenv){
   getMtype<- function(gid, dbenv=dbenv){#Function to get the managament method
   	 assign('gid', gid, envir=dbenv)
@@ -31,7 +27,7 @@ getMgid<- function(gid, dbenv){
     }
     return(list(mtype=mtype, gpid2=gpid2))
   }#end of function to get managament method
-  
+
   mtype<- getMtype(gid, dbenv=dbenv)
   while(mtype[[1]]=='MAN' & mtype[[2]]!=0){
   	gid<- mtype[[2]]

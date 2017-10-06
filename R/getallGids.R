@@ -1,3 +1,11 @@
+#' get1Gen Function for getting all gids associated with a name
+#'
+#' @import RPostgreSQL
+#' @param nm A vector of names
+#' @param dbenv the database connection environment
+#' @return a vector of gids
+#' @export
+#'
 getallGids<- function(nm, dbenv){
   nm<- paste('\'',nm, '\'',sep="")
   assign('nm', nm, envir=dbenv)
@@ -5,7 +13,7 @@ getallGids<- function(nm, dbenv){
   if(nrow(gids)>0){
     gids<- gids[,'gid']
   }else{
-    gids<- NA 
+    gids<- NA
   }
   return(gids)
 }

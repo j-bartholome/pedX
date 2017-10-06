@@ -1,13 +1,12 @@
-#################
-# tracePedg1
-#' Function for tracing one generation of a pedigree
-#' 
-#'  Parameters:
-#'  @gid A gid
-#'  
-#'  @return A dataframe of query results containg complete generation traced
-#'  
-################
+#' tracePedg1 function for tracing one generation of a pedigree
+#'
+#' @import RPostgreSQL
+#' @import pedigreemm
+#' @param gid A gid
+#' @param dbenv the database connection environment
+#' @return A dataframe of query results containg complete generation traced
+#' @export
+#'
 
 tracePedg1<- function(gid, dbenv){
   assign('gid', gid, envir=dbenv)
@@ -22,7 +21,7 @@ tracePedg1<- function(gid, dbenv){
       if(nprgntr==-1){ #if derivitave methods
         f1 <- germplasm[1,"gpid1"] #get the id for the f1 cross
         assign('f1', f1, envir=dbenv)
-        f1cross <- with(dbenv,dbGetQuery(con,  #look up f1 cross 
+        f1cross <- with(dbenv,dbGetQuery(con,  #look up f1 cross
                               sprintf("SELECT * FROM germplsm WHERE gid=%d",f1)))
       }
       tab<- germplasm #initialize results table
@@ -32,14 +31,14 @@ tracePedg1<- function(gid, dbenv){
           germplasm <- with(dbenv,dbGetQuery(con, #look up the pedigree of the parent
                                   sprintf("SELECT * FROM germplsm WHERE gid=%d",gpid2)))
           tab<- rbind(tab, germplasm) #add the immediate parent ped to the table
-        }else{ #if not deriv. stop 
+        }else{ #if not deriv. stop
           break
         }
       }
-      if(nprgntr==-1){#if derivative 
+      if(nprgntr==-1){#if derivative
         tab<- as.matrix(rbind(tab, f1cross)) #add f1 cross to the table
-      }else{ #make the cross 
-        tab<-germplasm 
+      }else{ #make the cross
+        tab<-germplasm
       }
     }#if numb of progenetors is missing
     return(tab)
