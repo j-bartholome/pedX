@@ -7,7 +7,7 @@
 #' @export
 #'
 F1inbred<- function(cp, gidvec, dbenv){
-  cross<- sapply(gidvec, getF1, dbenv=db)
+  cross<- sapply(gidvec, getF1, dbenv=dbenv)
   ix<- match(cross, row.names(cp))
   I<- diag(cp[ix, ix])-1
   return(I)
