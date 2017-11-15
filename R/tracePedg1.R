@@ -8,7 +8,6 @@
 #' @export
 #'
 tracePedg1<- function(gid, dbenv){
-  tab<- NA
   assign('gid', gid, envir=dbenv)
   germplasm <- with(dbenv,dbGetQuery(con, sprintf("SELECT * FROM germplsm WHERE gid=%d",gid)))
   if(nrow(germplasm)>0){
@@ -41,6 +40,6 @@ tracePedg1<- function(gid, dbenv){
         tab<-germplasm
       }
     }#if numb of progenetors is missing
+    return(tab)
   }#if record doesnt exist
-  return(tab)
 }
