@@ -1,5 +1,5 @@
 #' Sample selection function for selecting representative samples of a target population
-#' 
+#'
 #' @param cp a relationship matrx
 #' @param cand is a vector of indices pointing to the candidates for the sample
 #' @param target is a vector of indices pointing to the target population
@@ -7,7 +7,7 @@
 #' @param herit is the heritability of the trait
 #' @param ntry is the number of iterations of the exchange algorithm
 #' @param nrep is the number of repitions of the exchange algorithm
-#' 
+#'
 sampleSelect<- function(cp, cand, target, nchoose, herit=0.5, ntry=300, nrep=30){
   CDmean=function(A, Tindex0, Pindex0, h2, Contrast='Pop'){
     lambda=(1-h2)/h2
@@ -31,14 +31,14 @@ sampleSelect<- function(cp, cand, target, nchoose, herit=0.5, ntry=300, nrep=30)
     Z<- as.matrix(Z)
     Ident<-diag(nrow(X))
     M<-Ident- (X%*%solve(t(X)%*%X) %*% t(X) )
-    
+
     if(Contrast=="Pop"){
       T= contrasteNonPheno(Pindex, nrow(matA1), length(Tindex))
       T[Tindex,]= matrix(0, nrow=length(Tindex), ncol=ncol(T))
     }else{
       T= diag(nrow(matA1))
     }
-    
+
     matCD<-(t(T)%*%(matA1-lambda*solve(t(Z)%*%M%*%Z + lambda*invA1))%*%T)/(t(T)%*%matA1%*%T)
     if(Contrast=="Pop"){
       CD=diag(matCD)
@@ -48,7 +48,7 @@ sampleSelect<- function(cp, cand, target, nchoose, herit=0.5, ntry=300, nrep=30)
     rvec=mean(CD)
     return(rvec)
   }
-  
+
   rslt<- list()
   cds<- c()
   numb<- 0
@@ -56,14 +56,14 @@ sampleSelect<- function(cp, cand, target, nchoose, herit=0.5, ntry=300, nrep=30)
     tsamp<- sample(cand, 50)
     q<- CDmean(cp, Tindex0=tsamp, Pindex0=target, h2=herit, Contrast='Pop')
     numb<- numb+1
-    # Exchange algorithm 
+    # Exchange algorithm
     cpt2<- 1
     cpt<- 0
     #save rslts
-    rslt[[numb]]<-tsamp 
+    rslt[[numb]]<-tsamp
     cds<- append(cds, q)
     ##Start of the loop
-    while (cpt2<ntry) {  # Make sure that Ntry is enough in your case 
+    while (cpt2<ntry) {  # Make sure that Ntry is enough in your case
       cpt2<- cpt2+1
       q0<- q
       tsamp0<- tsamp
@@ -73,7 +73,7 @@ sampleSelect<- function(cp, cand, target, nchoose, herit=0.5, ntry=300, nrep=30)
       tsamp<- c(minus, plus)
       q<- CDmean(cp, Tindex0=tsamp, Pindex0=target, h2=herit, Contrast='Pop')
       numb<- numb+1
-      rslt[[numb]]<-tsamp 
+      rslt[[numb]]<-tsamp
       if(q<q0){
         tsamp<- tsamp0
       }

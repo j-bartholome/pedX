@@ -28,10 +28,19 @@ getallGen<- function(gidvec, dbenv){
     Pds<- unique(Pds[,c(1:3)])
     Pds[which(Pds[,2]==0),2]<- NA
     Pds[which(Pds[,3]==0),3]<- NA
+    lb<- Pds[,'label']
+
+    #hasdup<- lb[-match(unique(lb), lb)]
+    #if(length(hasdup)>0){
+      #for(i in 1:length(hasdup)){
+        #ixprob<- which(hasdup[i]==lb)
+
+      #}
+
     Pds2<-editPed(Pds[,'sire'], Pds[,'dam'], Pds[,'label'])
   }else{
     Pds2<- Pds
   }
-
   return(Pds2)
 }
+
