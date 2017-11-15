@@ -8,18 +8,22 @@
 #' @export
 #'
 getCOP<- function(gidvec=NULL, ped){
-  if(is.null(gidvec)){
-    gidvec<- ped[,'label']
-  }
-  if(class(ped)[1]=="data.frame"){
+   if(class(ped)[1]=="data.frame"){
+      if(is.null(gidvec)){
+        gidvec<- ped[,'label']
+      }
     sp2 <- editPed(ped[,'sire'],ped[,'dam'], ped[,'label'])
     P<- pedigree(sp2[,2],sp2[,3],sp2[,1])
   }
   if(class(ped)[1]=='pedigree'){
+    if(is.null(gidvec)){
+      gidvec<- ped@label
+    }
     P<- ped
   }
   rect <- Diagonal(x = sqrt(Dmat(P))) %*% Matrix::solve(Matrix::t(as(P,"sparseMatrix")), as(factor(P@label, levels = P@label), "sparseMatrix"))
   tmpA <- Matrix::crossprod(rect)
+  dimnames(tmpA)[[1]] <- dimnames(tmpA)[[2]] <- P@label
   tmp <- match(gidvec, P@label)
   tmpA <- tmpA[tmp, tmp]
   return(tmpA)

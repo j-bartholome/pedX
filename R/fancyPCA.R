@@ -20,6 +20,7 @@ fancyPCA<- function(q, labs, dim=3){
                  mode='markers')
   }
   #scree plot
+  tot<- sum(c(q$sdev)^2)
   datadf2<- data.frame(Percent=(q$sdev^2/tot*100)[1:10],
                        Component=c(1:10))
   p2<- plotly::plot_ly(datadf2, x=~Component,

@@ -1,7 +1,7 @@
 #' get1Gen Function for getting all gids associated with a name
 #'
 #' @import RPostgreSQL
-#' @param gid A vector of gids
+#' @param gid A gid
 #' @param dbenv the database connection environment
 #' @param type a numeric name type
 #' @return a vector of names
