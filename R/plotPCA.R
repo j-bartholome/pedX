@@ -3,7 +3,7 @@
 #' @param q is a result of princomp
 #' @export
 #'
-plotPCA<- function(q){
+plotPCA<- function(q, subgroup, colr='red'){
     par(mfrow=c(1,2))
     #pca plot
     tot<- sum(c(q$sdev)^2)
@@ -13,6 +13,7 @@ plotPCA<- function(q){
                 "percent explained", sep=" ")
     pc<- q$loadings[,c(1,2)]
     plot(pc, main="PCA plot", col='black', ylab=ylabt, xlab=xlabt)
+    points(pc[subgroup,1], pc[subgroup,2],col=colr)
     #scree plot
     plot((q$sdev^2/tot*100)[1:10], type='b',
          ylab='Percent of variation explained',
