@@ -12,7 +12,7 @@
 #' @param outcsv if csv output is required
 #' @export
 #'
-getKin<- function(vecint, desigs, file, sorted=TRUE, viewer=TRUE, outcsv=TRUE)
+getKin<- function(vecint, desigs, file, sorted=TRUE, viewer=TRUE, outcsv=TRUE){
 	P<- read.csv(file, row.names=1)
 	if(!sorted){
   		P<- prepPed(P)
