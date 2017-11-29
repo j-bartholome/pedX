@@ -36,7 +36,7 @@ getKin<- function(vecint, desigs, file, sorted=TRUE, viewer=TRUE, outcsv=TRUE, c
 		colnames(tab)<-c('Individual 1', "Individual 2", 'Kinship')
 		p <- ggplot(tab, aes(`Individual 1`, `Individual 2`)) + geom_tile(aes(fill = Kinship),
 			colour = "white") + scale_fill_gradient(low = colL, high = colH)+
-			geom_text(aes(label=round(Kinship,2))) + theme(panel.background = element_blank())+
+			geom_text(size=5,aes(label=round(Kinship,2))) + theme(panel.background = element_blank())+
 			theme(axis.text.x = element_text(color="black", size=14, angle=45, hjust=1),
       		axis.text.y = element_text(color="black", size=14, angle=45, hjust=1))+labs(x="", y="")
 		p
