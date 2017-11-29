@@ -6,7 +6,7 @@ Author: Who wrote it
 Maintainer: The package maintainer <yourself@somewhere.net>
 Description: More about what it does (maybe more than one line)
     Use four spaces when indenting paragraphs within the Description.
-Depends: R (>= 3.0), pedigreemm (>= 0.3), RPostgreSQL (>= 0.6), nadiv (>= 2.14), reshape (>=0.8)
+Depends: R (>= 3.0), pedigreemm (>= 0.3), RPostgreSQL (>= 0.6), nadiv (>= 2.14), reshape (>= 0.8)
 Imports: plotly (>= 4.7)
 License: What license is it under?
 Encoding: UTF-8
