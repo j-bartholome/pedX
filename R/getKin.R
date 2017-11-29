@@ -10,6 +10,8 @@
 #' @param sorted if the pedgree is sorted or not
 #' @param viewer if visualization is required
 #' @param outcsv if csv output is required
+#' @param colL low color
+#' @param colH high color
 #' @export
 #'
 getKin<- function(vecint, desigs, file, sorted=TRUE, viewer=TRUE, outcsv=TRUE, colL="darkseagreen3", colH="cornsilk"){
