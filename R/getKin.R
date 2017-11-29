@@ -12,7 +12,7 @@
 #' @param outcsv if csv output is required
 #' @export
 #'
-getKin<- function(vecint, desigs, file, sorted=TRUE, viewer=TRUE, outcsv=TRUE){
+getKin<- function(vecint, desigs, file, sorted=TRUE, viewer=TRUE, outcsv=TRUE, colL="darkseagreen3", colH="cornsilk"){
 	P<- read.csv(file, row.names=1)
 	if(!sorted){
   		P<- prepPed(P)
@@ -33,7 +33,7 @@ getKin<- function(vecint, desigs, file, sorted=TRUE, viewer=TRUE, outcsv=TRUE){
 		tab[,3]<- tab[,3]
 		colnames(tab)<-c('Individual 1', "Individual 2", 'Kinship')
 		p <- ggplot(tab, aes(`Individual 1`, `Individual 2`)) + geom_tile(aes(fill = Kinship),
-			colour = "white") + scale_fill_gradient(low = "darkseagreen3", high = "cornsilk")+
+			colour = "white") + scale_fill_gradient(low = colL, high = colH)+
 			geom_text(aes(label=round(Kinship,2))) + theme(panel.background = element_blank())+
 			theme(axis.text.x = element_text(color="black", size=14, angle=45, hjust=1),
       		axis.text.y = element_text(color="black", size=14, angle=45, hjust=1))+labs(x="", y="")
