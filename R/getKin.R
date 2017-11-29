@@ -20,7 +20,7 @@ getKin<- function(vecint, desigs, file, sorted=TRUE, viewer=TRUE, outcsv=TRUE, c
   		P<- prepPed(P)
   		write.csv(P, file=file)
 	}
-	pdsub<- prunePed(P, vecint)[,c(1:3)]
+	pdsub<- suppressWarnings(prunePed(P, vecint)[,c(1:3)])
 	ix<- match(vecint, pdsub[,1])
 	A<- as.matrix(makeA(pdsub))[ix, ix]/2
 	colnames(A)<- desigs
