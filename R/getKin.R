@@ -12,9 +12,10 @@
 #' @param outcsv if csv output is required
 #' @param colL low color
 #' @param colH high color
+#' @return list of plot and the matrix
 #' @export
 #'
-getKin<- function(vecint, desigs, file=dt, sorted=TRUE, viewer=TRUE, outcsv=TRUE, colL="darkseagreen3", colH="cornsilk"){
+getKin<- function(vecint, desigs, file=dt, sorted=TRUE, viewer=TRUE, colL="darkseagreen3", colH="cornsilk"){
 	if(is.character(file)){
     dt<- read.csv(file, row.names=1)
 	}else{
@@ -29,9 +30,6 @@ getKin<- function(vecint, desigs, file=dt, sorted=TRUE, viewer=TRUE, outcsv=TRUE
 	A<- as.matrix(makeA(pdsub))[ix, ix]/2
 	colnames(A)<- desigs
 	row.names(A)<- desigs
-	if(outcsv){
-		write.csv(A, file='kinship.csv')
-	}
 	if(viewer){
 		tab<-melt(A)
 		tab[,1]<- as.character(tab[,1])
@@ -43,7 +41,7 @@ getKin<- function(vecint, desigs, file=dt, sorted=TRUE, viewer=TRUE, outcsv=TRUE
 			geom_text(size=5,aes(label=round(Kinship,2))) + theme(panel.background = element_blank())+
 			theme(axis.text.x = element_text(color="black", size=14, angle=45, hjust=1),
       		axis.text.y = element_text(color="black", size=14, angle=45, hjust=1))+labs(x="", y="")
-		p
 	}
+return(list(p=p, A=A))
 }
 
