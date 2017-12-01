@@ -14,17 +14,17 @@
 #' @param colH high color
 #' @export
 #'
-getKin<- function(vecint, desigs, file=ped, sorted=TRUE, viewer=TRUE, outcsv=TRUE, colL="darkseagreen3", colH="cornsilk"){
+getKin<- function(vecint, desigs, file=dt, sorted=TRUE, viewer=TRUE, outcsv=TRUE, colL="darkseagreen3", colH="cornsilk"){
 	if(is.character(file)){
     dt<- read.csv(file, row.names=1)
 	}else{
-	  data(file)
+	  dt<- file
 	}
 	if(!sorted){
-  		P<- prepPed(dt)
-  		write.csv(P, file=file)
+  		dt<- prepPed(dt)
+  		write.csv(dt, file=file)
 	}
-	pdsub<- prunePed(P, vecint)[,c(1:3)]
+	pdsub<- prunePed(dt, vecint)[,c(1:3)]
 	ix<- match(vecint, pdsub[,1])
 	A<- as.matrix(makeA(pdsub))[ix, ix]/2
 	colnames(A)<- desigs
