@@ -15,7 +15,7 @@
 #' @return list of plot and the matrix
 #' @export
 #'
-getKin<- function(vecint, desigs, file=dt, sorted=TRUE, viewer=TRUE, colL="darkseagreen3", colH="cornsilk"){
+getKin<- function(vecint, desigs, file=dt, sorted=TRUE, viewer=TRUE){
 	if(is.character(file)){
     dt<- read.csv(file, row.names=1)
 	}else{
@@ -30,6 +30,8 @@ getKin<- function(vecint, desigs, file=dt, sorted=TRUE, viewer=TRUE, colL="darks
 	A<- as.matrix(makeA(pdsub))[ix, ix]/2
 	colnames(A)<- desigs
 	row.names(A)<- desigs
+	Aix<- heatorder(A)
+	A<- A[Aix, Aix]
 	if(viewer){
 		tab<-melt(A)
 		tab[,1]<- as.character(tab[,1])
