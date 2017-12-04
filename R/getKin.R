@@ -44,6 +44,7 @@ getKin<- function(vecint, desigs, file=dt, sorted=TRUE, viewer=TRUE){
 			theme(axis.text.x = element_text(color="black", size=14, angle=45, hjust=1),
       		axis.text.y = element_text(color="black", size=14, angle=45, hjust=1))+labs(x="", y="")
 	}
+	
 return(list(p=p, A=A))
 }
 
