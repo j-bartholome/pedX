@@ -10,8 +10,6 @@
 #' @param sorted if the pedgree is sorted or not
 #' @param viewer if visualization is required
 #' @param outcsv if csv output is required
-#' @param colL low color
-#' @param colH high color
 #' @return list of plot and the matrix
 #' @export
 #'
@@ -37,14 +35,15 @@ getKin<- function(vecint, desigs, file=dt, sorted=TRUE, viewer=TRUE){
 		tab[,1]<- as.character(tab[,1])
 		tab[,2]<- as.character(tab[,2])
 		tab[,3]<- tab[,3]
-		colnames(tab)<-c('Individual 1', "Individual 2", 'Kinship')
-		p <- ggplot(tab, aes(`Individual 1`, `Individual 2`)) + geom_tile(aes(fill = Kinship),
-			colour = "white") + scale_fill_gradient(low = colL, high = colH)+
-			geom_text(size=5,aes(label=round(Kinship,2))) + theme(panel.background = element_blank())+
-			theme(axis.text.x = element_text(color="black", size=14, angle=45, hjust=1),
-      		axis.text.y = element_text(color="black", size=14, angle=45, hjust=1))+labs(x="", y="")
+		colnames(tab)<-c('Individual 1', "Individual 2", 'Kinship')      		
+      p <- ggplot(tab, aes(`Individual 1`, `Individual 2`)) + geom_tile(aes(fill = Kinship))+
+      	geom_text(size=5, aes(label=round(Kinship,2))) + 
+      	scale_fill_gradientn(colours = heat_hcl(12, c=c(80,30), l=c(30,90), power=c(1/5, 1.5))[c(12:1)], 
+      	values  = rescale(c(min(tab$Kinship), max(tab$Kinship)))) + xlab(NULL) + ylab(NULL) + 
+      	theme(axis.text.x = element_text(angle = 45, hjust = 1))+ theme(panel.background = element_blank())
+    
 	}
 	
-return(list(p=p, A=A))
+return(list(p=p, A=A, tab=tab))
 }
 
