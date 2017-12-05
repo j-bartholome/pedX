@@ -12,7 +12,7 @@ heatorder<- function (x){
   Colv <- colMeans(x, na.rm = TRUE)
   hcc <- hclust(dist(x))
   ddc <- as.dendrogram(hcc)
-  ddc <- reorderfun(ddc, Colv)
+  ddc <- reorder(ddc, Colv)
   colInd <- order.dendrogram(ddc)
   return(ix=colInd)
 }
