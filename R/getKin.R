@@ -4,6 +4,9 @@
 #' @import Matrix
 #' @import ggplot2
 #' @import reshape
+#' @import colourpicker
+#' @import scales
+#' @import colorspace
 #' @param vecint gid vector
 #' @param desigs designation vector
 #' @param file pedigree file name
