@@ -19,10 +19,17 @@ sampleSelect<- function(cp, cand, target, nchoose, herit=0.5, ntry=300, nrep=30,
       return(mat)
     }
     A<- as.matrix(A)
-    matA1<- A[c(Tindex0, Pindex0), c(Tindex0, Pindex0)]
-    Tindex<- c(1:length(Tindex0))
-    Pindex<- (length(Tindex0)+1):nrow(matA1)
-    invA1= solve(matA1)
+    
+    if(contrast=='Pop'){
+    		matA1<- A[c(Tindex0, Pindex0), c(Tindex0, Pindex0)]
+    		Tindex<- c(1:length(Tindex0))
+    		Pindex<- (length(Tindex0)+1):nrow(matA1)
+    	}else{
+    		matA1<- matA[Pindex0, Pindex0]
+    		Tindex<- match(Tindex0, Pindex0)
+    	}
+    
+    invA1<-  solve(matA1)
     X<- as.matrix(matrix(1, nrow=nrow(matA1))[Tindex,])
     Z<- matrix(0, nrow(X), nrow(matA1))
     for(i in 1:length(Tindex)){
@@ -32,7 +39,7 @@ sampleSelect<- function(cp, cand, target, nchoose, herit=0.5, ntry=300, nrep=30,
     Ident<-diag(nrow(X))
     M<-Ident- (X%*%solve(t(X)%*%X) %*% t(X) )
 
-    if(Contrast==contrast){
+    if(Contrast=='Pop'){
       T= contrasteNonPheno(Pindex, nrow(matA1), length(Tindex))
       T[Tindex,]= matrix(0, nrow=length(Tindex), ncol=ncol(T))
     }else{
@@ -40,7 +47,7 @@ sampleSelect<- function(cp, cand, target, nchoose, herit=0.5, ntry=300, nrep=30,
     }
 
     matCD<-(t(T)%*%(matA1-lambda*solve(t(Z)%*%M%*%Z + lambda*invA1))%*%T)/(t(T)%*%matA1%*%T)
-    if(Contrast==contrast){
+    if(Contrast=='Pop'){
       CD=diag(matCD)
     }else{
       CD= diag(matCD)[-Tindex]
