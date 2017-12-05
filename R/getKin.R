@@ -41,8 +41,8 @@ getKin<- function(vecint, desigs, file=dt, sorted=TRUE, viewer=TRUE){
       	scale_fill_gradientn(colours = heat_hcl(12, c=c(80,30), l=c(30,90), power=c(1/5, 1.5))[c(12:1)], 
       	values  = rescale(c(min(tab$Kinship), max(tab$Kinship)))) + xlab(NULL) + ylab(NULL) + 
       	theme(axis.text.x = element_text(size=14, angle = 45, hjust = 1),
-      	axis.text.y = element_text(size=14, angle = 45, hjust = 1))+ theme(panel.background = element_blank()+
-      	theme(legend.position="none"))
+      	axis.text.y = element_text(size=14, angle = 45, hjust = 1))+ 
+      	theme(panel.background = element_blank(), legend.position="none")
     
 	}
 	
