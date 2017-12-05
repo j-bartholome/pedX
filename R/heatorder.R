@@ -8,8 +8,8 @@ heatorder<- function (x){
   di <- dim(x)
   nr <- di[1L]
   nc <- di[2L]
-  Rowv <- rowMeans(x, na.rm = na.rm)
-  Colv <- colMeans(x, na.rm = na.rm)
+  Rowv <- rowMeans(x, na.rm = TRUE)
+  Colv <- colMeans(x, na.rm = TRUE)
   hcc <- hclust(dist(x))
   ddc <- as.dendrogram(hcc)
   ddc <- reorderfun(ddc, Colv)
