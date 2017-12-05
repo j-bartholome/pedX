@@ -20,7 +20,7 @@ sampleSelect<- function(cp, cand, target, nchoose, herit=0.5, ntry=300, nrep=30,
     }
     A<- as.matrix(A)
     
-    if(contrast=='Pop'){
+    if(Contrast=='Pop'){
     		matA1<- A[c(Tindex0, Pindex0), c(Tindex0, Pindex0)]
     		Tindex<- c(1:length(Tindex0))
     		Pindex<- (length(Tindex0)+1):nrow(matA1)
