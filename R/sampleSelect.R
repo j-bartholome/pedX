@@ -25,7 +25,7 @@ sampleSelect<- function(cp, cand, target, nchoose, herit=0.5, ntry=300, nrep=30,
     		Tindex<- c(1:length(Tindex0))
     		Pindex<- (length(Tindex0)+1):nrow(matA1)
     	}else{
-    		matA1<- matA[Pindex0, Pindex0]
+    		matA1<- A[Pindex0, Pindex0]
     		Tindex<- match(Tindex0, Pindex0)
     	}
     
