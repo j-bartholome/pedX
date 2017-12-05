@@ -8,8 +8,8 @@
 #' @param ntry is the number of iterations of the exchange algorithm
 #' @param nrep is the number of repitions of the exchange algorithm
 #'
-sampleSelect<- function(cp, cand, target, nchoose, herit=0.5, ntry=300, nrep=30){
-  CDmean=function(A, Tindex0, Pindex0, h2, Contrast='Pop'){
+sampleSelect<- function(cp, cand, target, nchoose, herit=0.5, ntry=300, nrep=30, contrast){
+  CDmean=function(A, Tindex0, Pindex0, h2, Contrast=contrast){
     lambda=(1-h2)/h2
     contrasteNonPheno=function(NotSampled,Nind,Nind_in_Sample){
       mat=matrix(-1/Nind,Nind,Nind-Nind_in_Sample)
@@ -32,7 +32,7 @@ sampleSelect<- function(cp, cand, target, nchoose, herit=0.5, ntry=300, nrep=30)
     Ident<-diag(nrow(X))
     M<-Ident- (X%*%solve(t(X)%*%X) %*% t(X) )
 
-    if(Contrast=="Pop"){
+    if(Contrast==contrast){
       T= contrasteNonPheno(Pindex, nrow(matA1), length(Tindex))
       T[Tindex,]= matrix(0, nrow=length(Tindex), ncol=ncol(T))
     }else{
@@ -40,7 +40,7 @@ sampleSelect<- function(cp, cand, target, nchoose, herit=0.5, ntry=300, nrep=30)
     }
 
     matCD<-(t(T)%*%(matA1-lambda*solve(t(Z)%*%M%*%Z + lambda*invA1))%*%T)/(t(T)%*%matA1%*%T)
-    if(Contrast=="Pop"){
+    if(Contrast==contrast){
       CD=diag(matCD)
     }else{
       CD= diag(matCD)[-Tindex]
@@ -53,8 +53,8 @@ sampleSelect<- function(cp, cand, target, nchoose, herit=0.5, ntry=300, nrep=30)
   cds<- c()
   numb<- 0
   for(i in 1:nrep){
-    tsamp<- sample(cand, 50)
-    q<- CDmean(cp, Tindex0=tsamp, Pindex0=target, h2=herit, Contrast='Pop')
+    tsamp<- sample(cand, nchoose)
+    q<- CDmean(cp, Tindex0=tsamp, Pindex0=target, h2=herit, Contrast=contrast)
     numb<- numb+1
     # Exchange algorithm
     cpt2<- 1
@@ -71,7 +71,7 @@ sampleSelect<- function(cp, cand, target, nchoose, herit=0.5, ntry=300, nrep=30)
       minus<- sample(tsamp)[-1]
       plus<- sample(setdiff(cand, tsamp))[1]
       tsamp<- c(minus, plus)
-      q<- CDmean(cp, Tindex0=tsamp, Pindex0=target, h2=herit, Contrast='Pop')
+      q<- CDmean(cp, Tindex0=tsamp, Pindex0=target, h2=herit, Contrast=contrast)
       numb<- numb+1
       rslt[[numb]]<-tsamp
       if(q<q0){
