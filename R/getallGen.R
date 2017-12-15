@@ -30,12 +30,14 @@ getallGen<- function(gidvec, dbenv){
     Pds[which(Pds[,3]==0),3]<- NA
     lb<- Pds[,'label']
 
-    #hasdup<- lb[-match(unique(lb), lb)]
-    #if(length(hasdup)>0){
-      #for(i in 1:length(hasdup)){
-        #ixprob<- which(hasdup[i]==lb)
-
-      #}
+    hasdup<- lb[-match(unique(lb), lb)]
+    if(length(hasdup)>0){
+      for(i in 1:length(hasdup)){
+        ixprob<- which(hasdup[i]==lb)
+        mata<- Pds[-ixprob,]
+        matb<- apply(Pds[ixprob,], 2, Mode)
+        Pds<- rbind(mata, matb)
+	}
 
     Pds2<-editPed(Pds[,'sire'], Pds[,'dam'], Pds[,'label'])
   }else{
