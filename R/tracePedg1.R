@@ -10,8 +10,8 @@
 tracePedg1<- function(gid, dbenv){
   assign('gid', gid, envir=dbenv)
   germplasm <- with(dbenv,dbGetQuery(con, sprintf("SELECT * FROM germplsm WHERE gid=%d",gid)))
-  while(germplasm[,'grplce']!=0){
-  	assign('gid', germplasm[,'grplce'], envir=dbenv)
+  while(germplasm[1,'grplce']!=0){
+  	assign('gid', germplasm[1,'grplce'], envir=dbenv)
   	germplasm <- with(dbenv,dbGetQuery(con, sprintf("SELECT * FROM germplsm WHERE gid=%d",gid)))
   }
   if(nrow(germplasm)>0){
@@ -22,11 +22,17 @@ tracePedg1<- function(gid, dbenv){
         germplasm[1,"gpid2"]<-0 #make male parent missing
       }
       if(nprgntr==-1){ #if derivitave methods
-        f1 <- germplasm[1,"gpid1"] #get the id for the f1 cross
+        f1row<- germplasm[1,"gpid1"]
+  		f1<- f1row[1,]
         assign('f1', f1, envir=dbenv)
         #look up f1 cross
         f1cross <- with(dbenv,dbGetQuery(con,
                               sprintf("SELECT * FROM germplsm WHERE gid=%d",f1)))
+          while(f1cross[1,'grplce']!=0){
+          	f1<- f1cross[1,'grplce']
+          	assign('f1', f1, envir=dbenv)
+  			f1cross <- with(dbenv,dbGetQuery(con, sprintf("SELECT * FROM germplsm WHERE gid=%d",f1)))
+  			}
       }
       tab<- germplasm #initialize results table
       while(nrow(germplasm)>0){ #if germplasm lookup contains records
