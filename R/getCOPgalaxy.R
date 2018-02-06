@@ -9,9 +9,10 @@
 #' (number1=GalaxyNumericParam(required=TRUE),
 getCOPgalaxy<- function(pathPed=GalaxyCharacterParam(required=TRUE), 
                         pathIds= GalaxyCharacterParam(required=TRUE), 
-                        ordered= GalaxyLogicalParam(required=TRUE)){
+                        ordered= GalaxyLogicalParam(required=TRUE),
+                        outputfile= GalaxyOutput('COPsparse', 'RData')){
   pd<- read.csv(pathPed, row.names=1)
   ids<- read.csv(pathIds)[,1]
   cp<- getCOP(ids, pd, ordered=ordered)
-  save.image(cp, file='COPsparse.RData')
+  save.image(cp, file=outputfile)
 }
