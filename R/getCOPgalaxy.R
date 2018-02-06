@@ -18,6 +18,8 @@ getCOPgalaxy<- function(pathPed=GalaxyInputFile(required=TRUE, formatFilter=char
 	}
 	pdsub<- prunePed(pd, ids)[,c(1:3)]
 	ix<- match(ids, pdsub[,1])
-	A<- as.matrix(makeA(pdsub))[ix, ix]
+	A<- as.matrix(suppressWarnings(makeA(pdsub)))[ix, ix]
+	row.names(A)<- ids
+	colnames(A)<- ids
   	write.csv(A, file=outputfile)
 }
