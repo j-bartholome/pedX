@@ -8,7 +8,10 @@
 #' @param ntry is the number of iterations of the exchange algorithm
 #' @param nrep is the number of repitions of the exchange algorithm
 #'
-sampleSelect<- function(cp, cand, target, nchoose, herit=0.5, ntry=300, nrep=30, contrast='Pop'){
+sampleSelect2<- function(cp, cand, target, nchoose, herit=0.5, ntry=300, nrep=30, contrast='Pop'){
+  
+
+  
   CDmean=function(A, Tindex0, Pindex0, h2, Contrast=contrast){
     lambda=(1-h2)/h2
     contrasteNonPheno=function(NotSampled,Nind,Nind_in_Sample){

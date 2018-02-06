@@ -7,7 +7,7 @@
 #' @return A sparse relationship matrix
 #' @export
 #'
-getCOP<- function(gidvec=NULL, ped){
+getCOP<- function(gidvec=NULL, ped, ordered=TRUE){
    if(class(ped)[1]=="data.frame"){
       if(is.null(gidvec)){
         gidvec<- ped[,'label']
