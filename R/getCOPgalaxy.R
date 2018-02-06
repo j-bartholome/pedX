@@ -19,5 +19,5 @@ getCOPgalaxy<- function(pathPed=GalaxyInputFile(required=TRUE, formatFilter=char
 	pdsub<- prunePed(pd, ids)[,c(1:3)]
 	ix<- match(ids, pdsub[,1])
 	A<- as.matrix(makeA(pdsub))[ix, ix]
-  	save.image(A, file=outputfile)
+  	save(A, file=outputfile)
 }
