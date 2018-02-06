@@ -6,7 +6,6 @@
 #' @param ordered boolean if pedigree is ordered or not
 #' @export
 #' 
-#' (number1=GalaxyNumericParam(required=TRUE),
 getCOPgalaxy<- function(pathPed=GalaxyCharacterParam(required=TRUE), 
                         pathIds= GalaxyCharacterParam(required=TRUE), 
                         ordered= GalaxyLogicalParam(required=TRUE),
