@@ -6,9 +6,10 @@
 #' @param ordered boolean if pedigree is ordered or not
 #' @export
 #' 
-getCOPgalaxy<- function(pathPed, pathIds, ordered){
-  pathPed<- GalaxyCharacterParam(pathPed)
-  pathIds<- GalaxyCharacterParam(pathIds)
+#' (number1=GalaxyNumericParam(required=TRUE),
+getCOPgalaxy<- function(pathPed=GalaxyCharacterParam(required=TRUE), 
+                        pathIds= GalaxyCharacterParam(required=TRUE), 
+                        ordered= GalaxyLogicalParam(required=TRUE)){
   pd<- read.csv(pathPed, row.names=1)
   ids<- read.csv(pathIds)[,1]
   cp<- getCOP(ids, pd, ordered=ordered)
