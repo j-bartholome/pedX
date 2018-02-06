@@ -1,6 +1,6 @@
 \name{getCOPgalaxy}
 \alias{getCOPgalaxy}
-\title{getCOPgalaxy wrapper function for getting a relationship matrix}
+\title{Get pedigree relationship matrix}
 \usage{
 getCOPgalaxy<- function(pathPed=GalaxyInputFile(required=TRUE, formatFilter=character(0)),
                         pathIds= GalaxyInputFile(required=TRUE, formatFilter=character(0)),
