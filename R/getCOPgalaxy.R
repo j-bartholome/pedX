@@ -10,7 +10,7 @@
 getCOPgalaxy<- function(pathPed=GalaxyInputFile(required=TRUE, formatFilter=character(0)),
                         pathIds= GalaxyInputFile(required=TRUE, formatFilter=character(0)),
                         ordered= GalaxyLogicalParam(required=TRUE),
-                        outputfile= GalaxyOutput('COPsparse', 'RData')){
+                        outputfile= GalaxyOutput('relmat', 'RData')){
   pd<- read.csv(pathPed, row.names=1)
   ids<- read.csv(pathIds)[,1]
   	if(!ordered){
