@@ -10,10 +10,6 @@
 tracePedg1<- function(gid, dbenv){
   assign('gid', gid, envir=dbenv)
   germplasm <- with(dbenv,dbGetQuery(con, sprintf("SELECT * FROM germplsm WHERE gid=%d",gid)))
-  while(germplasm[,'grplce']!=0){
-  	assign('gid', germplasm[,'grplce'], envir=dbenv)
-  	germplasm <- with(dbenv,dbGetQuery(con, sprintf("SELECT * FROM germplsm WHERE gid=%d",gid)))
-  }
   if(nrow(germplasm)>0){
     nprgntr<- germplasm[,'gnpgs'] #number of progeneters
     tab<- germplasm
