@@ -10,7 +10,7 @@
 getCOPgalaxy<- function(pathPed=GalaxyInputFile(required=TRUE, formatFilter=character(0)),
                         pathIds= GalaxyInputFile(required=TRUE, formatFilter=character(0)),
                         ordered= GalaxyLogicalParam(required=TRUE),
-                        outputfile= GalaxyOutput('relmat', 'rda')){
+                        outputfile= GalaxyOutput('relmat', 'csv')){
   pd<- read.csv(pathPed, row.names=1)
   ids<- read.csv(pathIds)[,1]
   	if(!ordered){
@@ -19,5 +19,5 @@ getCOPgalaxy<- function(pathPed=GalaxyInputFile(required=TRUE, formatFilter=char
 	pdsub<- prunePed(pd, ids)[,c(1:3)]
 	ix<- match(ids, pdsub[,1])
 	A<- as.matrix(makeA(pdsub))[ix, ix]
-  	save(A, file=outputfile)
+  	write.csv(A, file=outputfile)
 }
