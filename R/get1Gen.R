@@ -33,18 +33,6 @@ get1Gen<-function(gidvec, dbenv){
     tbs[which(tbs[,'gpid1']==0),'gpid1']<- NA
     tbs[which(tbs[,'gpid2']==0),'gpid2']<- NA
     tbs2<- unique(tbs[,c('gid','gpid1','gpid2')])
-    
-    lb<- as.character(tbs2[,'gid'])
-    hasdup<- lb[-match(unique(lb), lb)]
-    if(length(hasdup)>0){
-      	for(i in 1:length(hasdup)){
-        	ixprob<- which(hasdup[i]==lb)
-        	mata<- tbs2[-ixprob,]
-        	matb<- apply(tbs2[ixprob,], 2, Mode)
-        	tbs2<- rbind(mata, matb)
-		}
-	}
-    
     PD<- editPed(tbs2[,'gpid1'], tbs2[,'gpid2'], tbs2[,'gid'])
   }else{
     tbs[which(tbs==0)]<- NA
