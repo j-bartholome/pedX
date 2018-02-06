@@ -7,8 +7,10 @@
 #' @export
 #' 
 getCOPgalaxy<- function(pathPed, pathIds, ordered){
-  pd<- read.csv(GalaxyCharacterParam(pathPed), row.names=1)
-  ids<- read.csv(GalaxyCharacterParam((pathIds))[,1]
+  pathPed<- GalaxyCharacterParam(pathPed)
+  pathIds<- GalaxyCharacterParam(pathIds)
+  pd<- read.csv(pathPed, row.names=1)
+  ids<- read.csv(pathIds)[,1]
   cp<- getCOP(ids, pd, ordered=ordered)
   save.image(cp, file='COPsparse.RData')
 }
