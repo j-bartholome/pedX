@@ -1,7 +1,8 @@
 #' getCOPgalaxy wrapper function for getting a sparse relationship (COP) matrix
 #'
-#' @param pathPed path to pedigree
-#' @param pathIds path to ids of interest
+#' @param pathPed character path to pedigree
+#' @param pathIds character path to ids of interest
+#' @param ordered boolean if pedigree is ordered or not
 #' @export
 #' 
 getCOPgalaxy<- function(pathPed, pathIds, ordered){
