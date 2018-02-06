@@ -12,8 +12,13 @@ getCOP<- function(gidvec=NULL, ped, ordered=TRUE){
       if(is.null(gidvec)){
         gidvec<- ped[,'label']
       }
-    sp2 <- editPed(ped[,'sire'],ped[,'dam'], ped[,'label'])
-    P<- pedigree(sp2[,2],sp2[,3],sp2[,1])
+    if(!ordered){ 
+      sp2 <- editPed(ped[,'sire'],ped[,'dam'], ped[,'label'])
+    }else{
+      sp2<- ped
+    }
+      P<- pedigree(sp2[,2],sp2[,3],sp2[,1])
+    
   }
   if(class(ped)[1]=='pedigree'){
     if(is.null(gidvec)){
