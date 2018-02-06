@@ -1,5 +1,6 @@
-#' getCOPgalaxy wrapper function for getting a sparse relationship (COP) matrix
+#' getCOPgalaxy wrapper function for getting a relationship matrix
 #'
+#' @import nadiv
 #' @import RGalaxy
 #' @param pathPed galaxy input file for pedigree
 #' @param pathIds galaxy input file for ids of interest
@@ -12,6 +13,11 @@ getCOPgalaxy<- function(pathPed=GalaxyInputFile(required=TRUE, formatFilter=char
                         outputfile= GalaxyOutput('COPsparse', 'RData')){
   pd<- read.csv(pathPed, row.names=1)
   ids<- read.csv(pathIds)[,1]
-  cp<- getCOP(ids, pd, ordered=ordered)
-  save.image(cp, file=outputfile)
+  	if(!ordered){
+  		pd<- prepPed(pd)
+	}
+	pdsub<- prunePed(pd, ids)[,c(1:3)]
+	ix<- match(ids, pdsub[,1])
+	A<- as.matrix(makeA(pdsub))[ix, ix]
+  	save.image(A, file=outputfile)
 }

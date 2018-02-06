@@ -2,15 +2,15 @@
 \alias{getCOPgalaxy}
 \title{getCOPgalaxy wrapper function for getting a sparse relationship (COP) matrix}
 \usage{
-getCOPgalaxy<- function(pathPed=GalaxyCharacterParam(required=TRUE), 
-                        pathIds= GalaxyCharacterParam(required=TRUE), 
+getCOPgalaxy<- function(pathPed=GalaxyInputFile(required=TRUE, formatFilter=character(0)),
+                        pathIds= GalaxyInputFile(required=TRUE, formatFilter=character(0)),
                         ordered= GalaxyLogicalParam(required=TRUE),
                         outputfile= GalaxyOutput('COPsparse', 'RData'))
 }
 \arguments{
-\item{pathPed}{character path to pedigree}
+\item{pathPed}{galaxy input file for pedigree}
 
-\item{pathIds}{character path to ids of interest}
+\item{pathIds}{galaxy input file for ids of interest}
 }
 
 \description{
