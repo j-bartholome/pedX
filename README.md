@@ -1,6 +1,17 @@
 ## Synopsis
 
-This project enables you to get useful information from pedigrees stored in gms. It enables calculation of coefficients of kinship (aka COP), inbreeding coefficients of lines and populations, numbers of crossing cycles, numbers of 'equivalent complete generations', effective population size (Ne). It also enables the extraction of source gids (aka MGIDs) which are useful for combining data across multiple experiments for analysis in legacy datasets. the package RPostgreSQL and and pedigreemm are required.
+This package enables you to get useful information from pedigrees stored in gms. 
+It enables calculation of:
+
+* coefficients of kinship (aka COP)
+* inbreeding coefficients of lines and populations,
+* numbers of crossing cycles
+* numbers of 'equivalent complete generations' (EqCG)
+* effective population size (Ne) 
+
+It also enables the extraction of source gids (aka MGIDs) which are useful 
+for combining data across multiple experiments for analysis in legacy datasets. 
+The packages RPostgreSQL and pedigreemm are required.
 
 ## Motivation
 
